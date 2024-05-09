@@ -1,0 +1,65 @@
+@startuml
+skin rose
+
+package model {
+
+    abstract class FiguraGeometrica {
+        - {abstract} color: String
+
+        + FiguraGeometrica(color: String)
+        + {abstract} calcularArea(): double
+
+    }
+
+    class Rectangulo {
+        - base: double
+        - altura: double
+
+        + Rectangulo(base: double, altura: double)
+        + calcularPerimetro(): double
+    }
+
+    class Circulo {
+        - radio: double
+
+        + Circulo(radio: double)
+        + calcularLongitudCircunferencia(): double
+    }
+
+    class Triangulo {
+        - base: double
+        - altura: double
+        - lado1: double
+        - lado2: double
+
+        + Triangulo(base: double, altura: double,
+        lado1: double, lado2: double)
+        + calcularPerimetro(): double
+    }
+
+    FiguraGeometrica <|-- Rectangulo : hereda
+    FiguraGeometrica <|-- Circulo : hereda
+    FiguraGeometrica <|-- Triangulo : hereda
+
+    class ListaFigura {
+
+        - figuras: FiguraGeometrica[]
+        - cantidadActual: int
+        - cantidadMaxima: int
+
+        + ListaFigura(cantidadMaxima: int)
+
+        + agregarFigura(figura: FiguraGeometrica): void
+        + obtenerRectangulos(): Rectangulo[]
+
+    }
+
+    ListaFigura o-- FiguraGeometrica : contiene
+
+
+}
+
+
+
+
+@enduml
